@@ -1,42 +1,65 @@
 # Apache Superset Installation Script
 
-This repository provides a one-click installation script for setting up Apache Superset on a Linux system.
+This repository provides a ready-to-use script for setting up [Apache Superset](https://superset.apache.org/) on a Linux system with `systemd` support.
 
-## Features
+---
 
-- Creates a Python virtual environment
-- Installs compatible versions of Superset and Flask
-- Initializes the Superset database
-- Creates an admin user
-- Registers a systemd service to manage Superset as a background process
+## 🚀 Quick Setup Instructions
 
-## Usage
+### 1. Download the Script
+Clone this repository or download the files.
 
-1. Clone this repository or download the script archive.
-2. Make the script executable:
+```bash
+git clone <repo-url>
+cd superset-setup
+```
+
+### 2. Run the Installation Script
 
 ```bash
 chmod +x install_superset.sh
-```
-
-3. Run the script:
-
-```bash
 ./install_superset.sh
 ```
 
-4. Access Superset in your browser:
+This will:
+- Create a virtual environment
+- Install Apache Superset and dependencies
+- Create an admin user
+- Load optional sample data
+- Create and start a systemd service
 
-```
-http://<your-ip>:8088
-```
+### 3. Access Superset
+
+Visit: [http://localhost:8088](http://localhost:8088)
 
 Login credentials:
+- **Username**: `admin`
+- **Password**: `admin123`
 
-- **Username:** admin  
-- **Password:** admin123
+---
 
-## Notes
+## 🔧 Systemd Service
 
-- The script assumes Python 3 and `systemd` are installed on the machine.
-- You may modify the default username, password, or Superset version inside the script.
+The script creates a service file at `/etc/systemd/system/superset.service`.
+
+To manage the service manually:
+
+```bash
+sudo systemctl status superset
+sudo systemctl restart superset
+```
+
+---
+
+## 🧼 Uninstallation
+
+To remove Superset:
+
+```bash
+sudo systemctl stop superset
+sudo systemctl disable superset
+sudo rm /etc/systemd/system/superset.service
+rm -rf ~/superset
+```
+
+---

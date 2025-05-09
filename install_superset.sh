@@ -24,7 +24,12 @@ echo "Initializing Superset database..."
 superset db upgrade
 
 echo "Creating admin user..."
-superset fab create-admin     --username admin     --firstname Admin     --lastname User     --email admin@admin.com     --password admin123
+superset fab create-admin \
+    --username admin \
+    --firstname Admin \
+    --lastname User \
+    --email admin@admin.com \
+    --password admin123
 
 echo "Loading example data (optional)..."
 superset load_examples || true
@@ -43,7 +48,7 @@ User=$USER
 Group=$USER
 WorkingDirectory=/home/$USER/superset
 Environment="FLASK_APP=superset.app:create_app"
-ExecStart=/home/$USER/superset/venv_superset/bin/superset run -p 8088 --with-threads
+ExecStart=/home/$USER/superset/venv_superset/bin/superset run -h 0.0.0.0 -p 8088 --with-threads
 Restart=always
 
 [Install]
